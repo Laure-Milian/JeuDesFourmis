@@ -1,14 +1,14 @@
 (function() { 
 
 	// Pour créer le tableau
-	creertableau(15, 15);
-	var $casefourmi1
+	creertableau(10, 15);
+	var $casefourmi1;
 
-	function creertableau(colonnes, lignes) {
-		for (var i = 0 ; i < colonnes ; i++) {
+	function creertableau(lignes, colonnes) {
+		for (var i = 0 ; i < lignes ; i++) {
 			$("table").append("<tr></tr>");
 		}
-		for (var i = 0 ; i < lignes ; i++) {
+		for (var i = 0 ; i < colonnes ; i++) {
 			$("tr").append("<td></td>");
 		}
 		var max = colonnes * lignes;
