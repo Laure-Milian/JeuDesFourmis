@@ -2,6 +2,7 @@
 
 	// Pour créer le tableau
 	creertableau(15, 15);
+	var $casefourmi1
 
 	function creertableau(colonnes, lignes) {
 		for (var i = 0 ; i < colonnes ; i++) {
@@ -10,14 +11,22 @@
 		for (var i = 0 ; i < lignes ; i++) {
 			$("tr").append("<td></td>");
 		}
+		var max = colonnes * lignes;
+		var min = 0
+		var numeroCase = getRandomIntInclusive(min, max);
+		console.log(numeroCase);
+		var $cases = $("td");
+		$casefourmi1 = $($cases[numeroCase]);
+		var fourmi1 = "#";
+		$casefourmi1.html(fourmi1);
 	};
 
-	// Variables globales
-	var $cases = $("td");
-	var $casefourmi1 = $($cases[65]);
-	var fourmi1 = "#";
-	$casefourmi1.html(fourmi1);
-	console.log($casefourmi1);
+	
+	function getRandomIntInclusive(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min +1)) + min;
+	}
 
 
 	// Lancement des déplacements
@@ -26,7 +35,6 @@
 	setInterval(function() {
 
 		var queldeplacement = getRandom();
-		console.log(queldeplacement);
 
 		if (queldeplacement <= 0.25) {
 			objDeplacements["droite"]();
@@ -63,5 +71,6 @@
 	function getRandom() {
 		return Math.random();
 	}
+
 
 })();
