@@ -1,11 +1,7 @@
 (function() { 
 
+	// Pour créer le tableau
 	creertableau(15, 15);
-	var $cases = $("td");
-	var $casefourmi1 = $($cases[6]);
-	var fourmi1 = "#";
-	$casefourmi1.html(fourmi1);
-
 
 	function creertableau(colonnes, lignes) {
 		for (var i = 0 ; i < colonnes ; i++) {
@@ -16,30 +12,56 @@
 		}
 	};
 
+	// Variables globales
+	var $cases = $("td");
+	var $casefourmi1 = $($cases[65]);
+	var fourmi1 = "#";
+	$casefourmi1.html(fourmi1);
+	console.log($casefourmi1);
+
+
+	// Lancement des déplacements
+	var objPositionFourmi1 = $casefourmi1.offset();
+
 	setInterval(function() {
 
-		deplacementgauche();
+		var queldeplacement = getRandom();
+		console.log(queldeplacement);
 
-
-		function deplacementdroite() {
-			$casefourmi1.html("");
-			$casefourmi1 = $($casefourmi1).next("");
-			$casefourmi1.html(fourmi1);
+		if (queldeplacement <= 0.25) {
+			objDeplacements["droite"]();
+		} else if (queldeplacement <= 0.5) {
+			objDeplacements["gauche"]();
+		} else if (queldeplacement <= 0.75) {
+			objDeplacements["haut"]();
+		} else {
+			objDeplacements["bas"]();
 		}
-
-		function deplacementgauche() {
-			$casefourmi1.html("");
-			$casefourmi1 = $($casefourmi1).prev("");
-			$casefourmi1.html(fourmi1);
-		}
-
-		function deplacementbas() {
-			$casefourmi1.html("");
-			$casefourmi1 = $($casefourmi1).next("tr");
-			$casefourmi1.html(fourmi1);
-		}
-
+		
 	}, 1000);
 
+	var objDeplacements = {
+		droite : function deplacementdroite() {
+			objPositionFourmi1["left"] = objPositionFourmi1["left"] + 50;
+			$casefourmi1.offset({ left: objPositionFourmi1["left"] });
+		},
+		gauche : function deplacementgauche() {
+			objPositionFourmi1["left"] = objPositionFourmi1["left"] - 50;
+			$casefourmi1.offset({ left: objPositionFourmi1["left"] });
+		},
+		haut : function deplacementhaut() {
+			objPositionFourmi1["top"] = objPositionFourmi1["top"] - 50;
+			$casefourmi1.offset({ top: objPositionFourmi1["top"] });
+		},
+		bas : function deplacementbas() {
+			objPositionFourmi1["top"] = objPositionFourmi1["top"] + 50;
+			$casefourmi1.offset({ top: objPositionFourmi1["top"] });
+		},
+	}
+
+
+	function getRandom() {
+		return Math.random();
+	}
 
 })();
